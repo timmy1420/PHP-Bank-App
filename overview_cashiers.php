@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    require 'backend/db.php';
     require 'includes/header.php';
 ?>
 
@@ -15,8 +17,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="space30"></div>
-                <button type="button" class="btn btn-success">Clienten overzicht</button>
-                <button type="button" class="btn btn-success offset-md-9">Toevoegen</button>
+                <a href="overview_clients.php" class="btn btn-success">Clienten overzicht</a>
+                <a href="daily_overview.php" class="btn btn-info offset-md-7">Dagoverzicht</a>
+                <a href="overview_transactions.php" class="btn btn-success">Transacties</a>
                 <div class="space50"></div>
 
                 <table class="table table-striped table-hover">
@@ -30,35 +33,29 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            $sql = "SELECT * FROM users";
+                            $query = $conn->query($sql);
+                            while($result = $query->fetch_assoc()) {
+                        ?>
                         <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>Doe</td>
-                            <td>Doe</td>
+                            <td><?php echo $result['firstname'] ?></td>
+                            <td><?php echo $result['lastname'] ?></td>
+                            <td><?php echo $result['last_login'] ?></td>
+                            <td><?php echo $result['last_logout'] ?></td>
                             <td>
-                                <button type="button" class="btn btn-info">Gegevens</button>
-                                <button type="button" class="btn btn-danger">Verwijderen</button>
+                                <button type="button" onclick="window.location='cashier_detail.php?id=<?php echo $result['id'] ?>'" class="btn btn-info">Gegevens</button>
+                                <!-- <button type="button" class="btn btn-danger">Verwijderen</button> -->
                             </td>
                         </tr>
-                        <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>Doe</td>
-                            <td>Doe</td>
-                            <td>
-                                <button type="button" class="btn btn-info">Gegevens</button>
-                                <button type="button" class="btn btn-danger">Verwijderen</button>
-                            </td>
-                        </tr>
+                        <?php
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
-
-</html>
+<?php
+    require 'includes/footer.php';
+?>

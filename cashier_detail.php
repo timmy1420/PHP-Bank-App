@@ -1,5 +1,25 @@
 <?php
+    session_start();
+    require 'backend/db.php';
     require 'includes/header.php';
+
+    if(isset($_GET['id'])) {
+        $param_id = $_GET['id'];    
+    } else {
+        exit();
+    }
+
+    $sql = "SELECT * FROM users WHERE id = '$param_id'";
+    $query = $conn->query($sql);
+    while($result = $query->fetch_assoc()) {
+        $firstname = $result['firstname'];
+        $lastname = $result['lastname'];
+        $username = $result['username'];
+        $last_login = $result['last_login'];
+        $last_logout = $result['last_logout'];
+        $created_at = $result['created_at'];
+    }
+
 ?>
 
 <body>
@@ -18,41 +38,39 @@
                 <table>
                     <tr style="height: 40px">
                         <td style="width: 200px"><b>Voornaam:</b></td>
-                        <td>Voornaam</td>
+                        <td><?php echo $firstname; ?></td>
                     </tr>
                     <tr style="height: 40px">
                         <td style="width: 200px"><b>Achternaam:</b></td>
-                        <td>Achternaam</td>
+                        <td><?php echo $lastname; ?></td>
                     </tr>
                     <tr style="height: 40px">
                         <td style="width: 200px"><b>Gebruikersnaam:</b></td>
-                        <td>Gebruikersnaam</td>
+                        <td><?php echo $username; ?></td>
                     </tr>
                     <tr style="height: 40px">
                         <td style="width: 200px"><b>Laatst aangemeld:</b></td>
-                        <td>Laatst aangemeld</td>
+                        <td><?php echo $last_login; ?></td>
                     </tr>
                     <tr style="height: 40px">
                         <td style="width: 200px"><b>Laatst afgemeld:</b></td>
-                        <td>Laatst afgemeld</td>
+                        <td><?php echo $last_logout; ?></td>
                     </tr>
                     <tr style="height: 40px">
                         <td style="width: 200px"><b>Geregistreerd op:</b></td>
-                        <td>Geregistreerd op</td>
+                        <td><?php echo $created_at; ?></td>
                     </tr>
                 </table>
                 <div class="space20"></div>
-                <button type="button" class="btn btn-primary">Terug</button>
+                <button type="button" onclick="app.back();" class="btn btn-primary">Terug</button>
             </div>
             <div class="col-md-4">
-                    <button type="button" class="btn btn-info">Bewerken</button>
-                    <button type="button" class="btn btn-info">Ingevoerde stortingen</button>
+                    <a href="edit_cashier.php?id=<?php echo $param_id; ?>" class="btn btn-info">Bewerken</a>
+                    <a href="cashier_transactions.php?id=<?php echo $param_id; ?>" class="btn btn-info">Ingevoerde stortingen</a>
             </div>
         </div>
     </div>
-
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
-
-</html>
+    
+<?php
+    require 'includes/footer.php';
+?>

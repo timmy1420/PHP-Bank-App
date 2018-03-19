@@ -14,10 +14,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Munten teller</a>
+                    <a class="nav-link" href="coins.php">Munten teller</a>
                 </li>
             </ul>
         </div>
-        <button type="button" class="btn btn-default">Afmelden</button>
+        <button onclick="window.location='logout.php';" type="button" class="btn btn-default">Afmelden</button>
     </div>
 </div>
