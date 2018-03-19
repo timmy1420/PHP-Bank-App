@@ -5,7 +5,7 @@
 
     if(isset($_POST['register'])) {
         $type = 'deposit';
-        $user_id = 1;
+        $user_id = $_SESSION['user_id'];
         $client_id = $_POST['client_id'];
         $cent5 = $_POST['cent5'];
         $cent10 = $_POST['cent10'];

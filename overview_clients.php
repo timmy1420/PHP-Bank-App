@@ -2,8 +2,6 @@
     session_start();
     require 'backend/db.php';
     require 'includes/header.php';
-
-    echo $_SESSION['user_id'];
 ?>
 
 <body>
@@ -18,7 +16,7 @@
         
         <div class="row">
             <div class="col-md-12">
-                <?php echo ($_SESSION['user_type'] == 'cashier') ? '<a href="deposit.php" class="btn btn-success">Storten</a><a href="withdrawal.php" class="btn btn-success pull-right offset-md-10">Opname</a>' : ''; ?>
+                <?php echo ($_SESSION['user_type'] == 'cashier') ? '<a href="deposit.php" class="btn btn-success">Storten</a><a href="withdrawal.php" class="btn btn-success pull-right offset-md-10">Opname</a>' : '<button type="button" onclick="app.back();" class="btn btn-primary">Terug</button>'; ?>
                 <div class="space20"></div>
 
                 <table class="table table-striped table-hover">
@@ -39,8 +37,8 @@
                         <tr>
                             <td><?php echo $result['firstname']; ?></td>
                             <td><?php echo $result['lastname']; ?></td>
-                            <td><?php echo $result['accountnumber']; ?></td>
-                            <?php echo ($_SESSION['user_type'] == 'admin') ? '<td>SRD'.$result['balance'].'</td>' : ''; ?>
+                            <td>SRD <?php echo $result['accountnumber']; ?></td>
+                            <?php echo ($_SESSION['user_type'] == 'admin') ? '<td>'.$result['balance'].'</td>' : ''; ?>
                         </tr>
                         <?php
                             }

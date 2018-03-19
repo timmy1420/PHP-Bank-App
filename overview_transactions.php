@@ -35,7 +35,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT transactions.*, clients.firstname, clients.lastname FROM transactions INNER JOIN clients ON clients.id  = transactions.user_id";
+                            $sql = "SELECT transactions.*, clients.firstname, clients.lastname FROM transactions INNER JOIN clients ON clients.id = transactions.client_id";
                             $query = $conn->query($sql);
                             while($result = $query->fetch_assoc()) {
                                 $cent5 = $result['cent5'];

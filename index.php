@@ -12,8 +12,9 @@
         $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
         $query = $conn->query($sql);
         if($query->num_rows == 1) {
-            $user_type = $query->fetch_assoc()['user_type'];
-            $user_id = $query->fetch_assoc()['id'];
+            $result =  $query->fetch_assoc();
+            $user_type = $result['user_type'];
+            $user_id = $result['id'];
 
             // Set session data
             $_SESSION['user_type'] = $user_type;
