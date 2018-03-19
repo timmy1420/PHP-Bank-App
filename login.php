@@ -11,10 +11,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <?php require 'includes/navbar.php'; ?>
-    <!--End Navbar -->
-
 
     <div class="container">
         <div class="space70"></div>
