@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="#">Bank Systeem</a>
+        <a class="navbar-brand" href="">Bank Systeem</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,5 +18,6 @@
                 </li>
             </ul>
         </div>
+        <button type="button" class="btn btn-default">Afmelden</button>
     </div>
 </div>

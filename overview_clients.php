@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/app.min.css" />
-</head>
+<?php
+    session_start();
+    require 'backend/db.php';
+    require 'includes/header.php';
+?>
 
 <body>
     <!-- Navbar -->
@@ -34,20 +28,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            $sql = "SELECT * FROM clients";
+                            $query = $conn->query($sql);
+                            while($result = $query->fetch_assoc()) {
+                        ?>
                         <tr>
-                            <td>John</td>
-                            <td>Doe</td>
+                            <td><?php echo $result['firstname'] ?></td>
+                            <td><?php echo $result['lastname'] ?></td>
                             <td>
                                 <button type="button" class="btn btn-primary">Iets</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>
-                                <button type="button" class="btn btn-primary">Iets</button>
-                            </td>
-                        </tr>
+                        <?php
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
