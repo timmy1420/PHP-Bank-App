@@ -1,41 +1,57 @@
-<!DOCTYPE html>
-<html>
+<?php
+    session_start();
+    require 'backend/db.php';
+    require 'includes/header.php';
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/app.min.css" />
-</head>
+    $error = "";
+
+    if(isset($_POST['login'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        $query = $conn->query($sql);
+        if($query->num_rows == 1) {
+            header("Location: overview_clients.php");
+        } else {
+            $error = '<div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4 class="alert-heading">Fout opgetreden!</h4>
+            <p class="mb-0">De ingevoerde gegevens zijn incorrect. Deze dient u juist in te voeren zodat dit systeem u kan identificeren.</p>
+        </div>';
+        }
+    }
+?>
 
 <body>
+
 
     <div class="container">
         <div class="space70"></div>
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <form>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                     <fieldset>
                         <center><h2>Aanmelden</h2></center>
                         <div class="space40"></div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" type="email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <label for="exampleInputEmail1">Gebruikersnaam:</label>
+                            <input class="form-control" name="username" type="text">
+                            <small id="emailHelp" class="form-text text-muted">Dit systeem is confidentieel.</small>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
+                            <label for="exampleInputPassword1">Wachtwoord:</label>
+                            <input class="form-control" placeholder="*****" name="password" type="password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button name="login" type="submit" class="btn btn-primary">Aanmelden</button>
                     </fieldset>
                 </form>
+                <div class="space30"></div>
+                <?php echo $error; ?>
             </div>
         </div>
+        
     </div>
-
 
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
